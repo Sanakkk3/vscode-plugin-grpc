@@ -1,0 +1,52 @@
+{
+    "name": "vscode-plugin-grpc",
+    "displayName": "vscode-plugin-grpc",
+    "description": "grpc demo",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.27.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:vscode-plugin-grpc.helloWorld"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "vscode-plugin-grpc.helloWorld",
+                "title": "Hello World"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "vscode-plugin-grpc.helloWorld",
+                "key": "ctrl+f9",
+                "mac": "cmd+f9",
+                "when": "editorTextFocus"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "vscode-test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^7.0.43",
+        "eslint": "^4.11.0",
+        "tslint": "^6.0.0",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6"
+    },
+    "dependencies": {
+        "@grpc/proto-loader": "^0.5.0",
+        "grpc": "^1.2.4"
+    }
+}
