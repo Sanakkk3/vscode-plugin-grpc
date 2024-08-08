@@ -9,7 +9,9 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": ["vscode-plugin-grpc.helloWorld"],
+  "activationEvents": [
+    "*"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
@@ -43,5 +45,23 @@
     "webpack-cli": "^5.1.4",
     "@vscode/test-cli": "^0.0.9",
     "@vscode/test-electron": "^2.4.0"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.11.1",
+    "@grpc/proto-loader": "^0.7.13",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^22.1.0",
+    "aws-sdk": "^2.1670.0",
+    "fs-extra": "^11.2.0",
+    "grpc": "^1.24.11",
+    "html-loader": "^5.1.0",
+    "minimist": "^1.2.8",
+    "mock-aws-s3": "^4.0.2",
+    "node-gyp": "^10.2.0",
+    "node-pre-gyp": "^0.17.0",
+    "npm": "^10.8.2",
+    "protobufjs": "^7.3.2",
+    "raw-loader": "^4.0.2",
+    "underscore": "^1.13.7"
   }
 }

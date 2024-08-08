@@ -16,7 +16,7 @@
  *
  */
 
-var PROTO_PATH = __dirname + '/../protos/api.proto';
+var PROTO_PATH = __dirname + '/../protos/pb_v1.proto';
 
 var grpc = require('@grpc/grpc-js');
 var protoLoader = require('@grpc/proto-loader');
@@ -28,7 +28,7 @@ var packageDefinition = protoLoader.loadSync(
      defaults: true,
      oneofs: true
     });
-var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
+var hello_proto = grpc.loadPackageDefinition(packageDefinition).pbv1;
 
 /**
  * Implements the SayHello RPC method.

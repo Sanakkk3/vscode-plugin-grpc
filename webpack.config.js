@@ -37,6 +37,21 @@ const extensionConfig = {
             loader: 'ts-loader'
           }
         ]
+      },
+      {
+        test: /\.html$/,
+        use: [
+            {
+                loader: 'html-loader',
+                options: {
+                    minimize: true  // 可选：是否压缩 HTML 文件
+                }
+            }
+        ]
+      },
+      {
+          test: /\.cs$/,
+          use: 'raw-loader'
       }
     ]
   },

@@ -5,7 +5,13 @@
 		"lib": ["ES2021"],
 		"sourceMap": true,
 		"rootDir": "src",
-		"strict": true 
+		"strict": true ,
+		"diagnostics": true,
+		"types":[
+			"node",
+			"grpc",
+			"mocha"
+		] 
 	},
 	"exclude":["node_modules"]
 }
