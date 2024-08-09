@@ -34,7 +34,27 @@ var hello_proto = grpc.loadPackageDefinition(packageDefinition).pbv1;
  * Implements the SayHello RPC method.
  */
 function sayHello(call, callback) {
-  callback(null, {message: 'Hello ' + call.request.name});
+  if (!call.request.name) {
+      return callback({
+          code: grpc.status.INVALID_ARGUMENT,
+          details: 'Name is required'
+      });
+  }
+  callback(null, { message: 'Hello ' + call.request.name });
+}
+
+/**
+* Implements the Authenticate RPC method.
+*/
+function authenticate(call, callback) {
+  if (call.request.username === "zsx" && call.request.password === "123") {
+      callback(null, { message: 'Hello ' + call.request.username });
+  } else {
+      callback({
+          code: grpc.status.UNAUTHENTICATED,
+          details: 'Invalid username or password'
+      });
+  }
 }
 
 /**
@@ -43,7 +63,8 @@ function sayHello(call, callback) {
  */
 function main() {
   var server = new grpc.Server();
-  server.addService(hello_proto.Greeter.service, {sayHello: sayHello});
+  server.addService(hello_proto.Authentication.service, { authenticate });
+  server.addService(hello_proto.Greeter.service, { sayHello });
   server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
     server.start();
   });

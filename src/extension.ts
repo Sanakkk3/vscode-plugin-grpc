@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { sayHello } from "./pbv1/pb_v1_client";
+import { authenticate } from "./pbv1/pb_v1_client";
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -7,8 +8,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const disposable = vscode.commands.registerCommand('vscode-plugin-grpc.helloWorld', () => {
 		vscode.window.showInformationMessage('Hello World from vscode-plugin-grpc!');
+		authenticate("zsx","123");
 		sayHello("zhousaixing");
-
 		console.log('1111111111!');
 	});
 
