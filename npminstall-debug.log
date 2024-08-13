@@ -3,7 +3,7 @@
   registry: 'https://registry.npmmirror.com',
   pkgs: [
     {
-      name: '@types/proto-loader',
+      name: 'net',
       version: 'latest',
       type: 'tag',
       alias: undefined,
@@ -15,7 +15,7 @@
   cacheDir: '/home/zhousaixing/.npminstall_tarball',
   env: {
     npm_config_registry: 'https://registry.npmmirror.com',
-    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=/home/zhousaixing/.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","@types/proto-loader"],"original":["--fix-bug-versions","--china","--userconfig=/home/zhousaixing/.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","@types/proto-loader"]}',
+    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=/home/zhousaixing/.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","net"],"original":["--fix-bug-versions","--china","--userconfig=/home/zhousaixing/.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","net"]}',
     npm_config_user_agent: 'npminstall/7.12.0 npm/? node/v20.16.0 linux x64',
     npm_config_cache: '/home/zhousaixing/.npminstall_tarball',
     NODE: '/usr/local/nodejs/bin/node',

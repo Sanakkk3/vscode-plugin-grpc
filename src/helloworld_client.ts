@@ -3,25 +3,37 @@ import * as protoLoader from '@grpc/proto-loader';
 import { error } from 'console';
 import { cli } from 'webpack';
 
-const PROTO_PATH = __dirname + '/../protos/pb_v1.proto';
-// const SERVER_ADDRESS = '192.168.0.11:50051';
-const SERVER_ADDRESS = 'localhost:50051';
+const PROTO_PATH = __dirname + '/../protos/helloworld.proto';
+const SERVER_ADDRESS = '192.168.0.11:50051';
+// const SERVER_ADDRESS = 'localhost:50051';
 
 interface GreeterService {
-  sayHello(request: { name: string }, callback: (error: grpc.ServiceError | null, response: { message: string }) => void): void;
-  sayHelloStreamReply(request: { name: string }): grpc.ClientReadableStream<{ message: string }>;
+  SayHello(
+    request: { name: string },
+    callback: (error: grpc.ServiceError | null, response: { message: string }) => void
+  ): void;
+
+  SayHelloStreamReply(
+    request: { name: string }
+  ): grpc.ClientReadableStream<{ message: string }>;
+
+  SayHelloBidiStream(
+    call: grpc.ServerDuplexStream<{ name: string }, { message: string }>
+  ): void;
 }
 
 interface AuthenticationService {
-  authenticate(request: { username: string, password: string }, callback: (error: grpc.ServiceError | null, response: { success: boolean, message: string }) => void): void;
+  Authenticate(
+    request: { username: string, password: string },
+    callback: (error: grpc.ServiceError | null, response: { success: boolean, message: string }) => void
+  ): void;
 }
 
 
 // 动态加载 .proto文件
 function loadProto() {
-  console.log("PROTO_PATH: ", PROTO_PATH);
   const pakageDefinition = protoLoader.loadSync(
-    PROTO_PATH,
+    PROTO_PATH,   // 定义的 .proto 服务
     {
       keepCase: true,
       longs: String,
@@ -30,8 +42,7 @@ function loadProto() {
       oneofs: true,
     });
   const protoDescriptor = grpc.loadPackageDefinition(pakageDefinition) as any;
-  console.log("loadProto success!");
-  return protoDescriptor.pbv1;
+  return protoDescriptor.helloworld;
 }
 
 function createClient<T>(service: string): T {
@@ -40,11 +51,15 @@ function createClient<T>(service: string): T {
   return client;
 }
 
-export function sayHello(name: string) {
+export function SayHello(name: string) {
+
+  console.log("run SayHello().");
+
   const client = createClient<GreeterService>('Greeter');
   const request = { name };
 
-  client.sayHello(request, (error, response) => {
+  client.SayHello(request, (error, response) => {
+    console.log("call for Greeter.SayHello service.");
     if (error) {
       console.error('Error:', error);
     } else {
@@ -53,11 +68,14 @@ export function sayHello(name: string) {
   });
 }
 
-export function sayHelloStreamReply(name: string) {
+export function SayHelloStreamReply(name: string) {
+
+  console.log("call for Greeter.SayHelloStreamReply service.");
+
   const client = createClient<GreeterService>('Greeter');
   const request = { name };
 
-  const call = client.sayHelloStreamReply(request);
+  const call = client.SayHelloStreamReply(request);
 
   call.on('data', (response) => {
     console.log('Streaming Reply:', response.message);
@@ -72,11 +90,15 @@ export function sayHelloStreamReply(name: string) {
   });
 }
 
-export function authenticate(username: string, password: string) {
+export function Authenticate(username: string, password: string) {
+
+  console.log("run Authenticate().");
+
   const client = createClient<AuthenticationService>('Authentication');
   const request = { username, password };
 
-  client.authenticate(request, (error, response) => {
+  client.Authenticate(request, (error, response) => {
+    console.log("call for Authentication.Authenticate service.");
     if (error) {
       console.error('Error:', error);
     } else {

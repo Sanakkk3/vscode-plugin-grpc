@@ -18,6 +18,10 @@
       {
         "command": "vscode-plugin-grpc.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "vscode-plugin-grpc.checkConnectivity",
+        "title": "Check Connectivity"
       }
     ]
   },
@@ -57,6 +61,7 @@
     "html-loader": "^5.1.0",
     "minimist": "^1.2.8",
     "mock-aws-s3": "^4.0.2",
+    "net": "^1.0.2",
     "node-gyp": "^10.2.0",
     "node-pre-gyp": "^0.17.0",
     "npm": "^10.8.2",
